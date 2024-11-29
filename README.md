@@ -1,8 +1,9 @@
 # Captcha Collection and Simple Recognition Tool
 
-A toolkit for automatically collecting and simple recognizing captchas from Melon Ticket - Global. The tool includes two main functional modules: captcha collection and recognition.
+A toolkit for automatically collecting and simply recognizing captchas from Melon Ticket - Global. The tool includes two main functional modules: captcha collection and recognition.  
+This project is more suitable for quickly preparing datasets. For deep learning solutions for corresponding captchas, please refer to [CapthcaDL](https://github.com/lstrhsu/CaptchaDL).
 
-![Captcha Preview](image.png)
+![Captcha Preview](https://github.com/lstrhsu/MyHost/blob/main/pics/captcha_130.png)
 
 ## Directory Structure
 ```
@@ -15,58 +16,75 @@ A toolkit for automatically collecting and simple recognizing captchas from Melo
 
 ## Installation Steps
 
-### 1. Install Python Dependencies
+#### 1. Install Python Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Install Tesseract-OCR
-1. Visit [Tesseract-OCR Download Page](https://github.com/UB-Mannheim/tesseract/wiki)
-2. Download and install Tesseract-OCR (Windows users should choose the Windows version)
-3. Default installation path: `C:\Program Files\Tesseract-OCR\`
-4. Remember the installation path as it will be needed later
+#### 2. Install Tesseract-OCR
+
+Remember the installation path as it will be needed in `quick_ocr.py`.
+
+Windows:
+- Download and install [Tesseract-OCR](https://github.com/UB-Mannheim/tesseract/wiki)
+- Default installation path: `C:\Program Files\Tesseract-OCR\`
+
+macOS:
+- Install using Homebrew:
+  ```bash
+  brew install tesseract
+  ```
+- Default installation path: `/usr/local/bin/tesseract`
 
 ## Usage Instructions
 
-### 1. Launch Chrome Browser
+#### 1. Launch Chrome Browser
 Run the following command in terminal:
+
+Windows:
 ```bash
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:/Users/your_username/AppData/Local/Google/Chrome/User Data"
 ```
+
+macOS:
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9222 --user-data-dir="/Users/your_username/Library/Application Support/Google/Chrome"
+```
+
 Note:
-- Replace "your_username" with your actual Windows username
+- Replace "your_username" with your actual username
 - If Chrome is installed in a different location, modify the path accordingly
-  
+
 Enter the Chrome browser, open the Melon Ticket - Global website, log in, and navigate to the ticket purchase popup page to ensure that the captcha image is displayed correctly.
    
-![购票弹窗](popup.png)
+![购票弹窗](https://github.com/lstrhsu/MyHost/blob/main/pics/melon_popup.png)
 
-### 2. Collect Captchas (collect_captcha.py)
-1. Run the collection script:
+#### 2. Collect Captchas (collect_captcha.py)
+Run the collection script:
 ```bash
 python collect_captcha.py
 ```
-2. The script will automatically:
-   - Connect to the opened Chrome browser
-   - Create saved_captcha folder (if it doesn't exist)
-   - Wait for user to press Enter to start collection
-   - Automatically collect 200 captcha images
-   - Save images in the saved_captcha folder
+The script will automatically:
+- Connect to the opened Chrome browser
+- Create saved_captcha folder (if it doesn't exist)
+- Wait for user to press Enter to start collection
+- Automatically collect 200 captcha images
+- Save images in the saved_captcha folder
 
-### 3. Recognize Captchas (quick_ocr.py)
-1. Run the recognition script:
+#### 3. Recognize Captchas (quick_ocr.py)
+Run the recognition script:
 ```bash
 python quick_ocr.py
 ```
-2. The script will automatically:
-   - Check necessary directories and Tesseract installation
-   - Read images from saved_captcha
-   - Preprocess and perform OCR on each image
-   - Save original images to processed_captcha folder with recognition results as filenames
+The script will automatically:
+- Check necessary directories and Tesseract installation
+- Read images from saved_captcha
+- Preprocess and perform OCR on each image
+- Save original images to processed_captcha folder with recognition results as names
 
 ## File Description
 
-### collect_captcha.py
+#### collect_captcha.py
 - Function: Automatically collect captcha images
 - Workflow:
   1. Connect to opened Chrome browser
@@ -75,7 +93,7 @@ python quick_ocr.py
   4. Automatically click refresh button for new captchas
   5. Save images to saved_captcha folder
 
-### quick_ocr.py
+#### quick_ocr.py
 - Function: Recognize captcha image content
 - Workflow:
   1. Read images from saved_captcha
@@ -85,20 +103,20 @@ python quick_ocr.py
 
 ## Important Notes
 
-1. Environment Requirements:
-   - Python 3.6 or higher
-   - Chrome browser
-   - Windows operating system (other systems need path modifications)
+#### Environment Requirements:
+- Python 3.6 or higher
+- Chrome browser
+- Windows operating system (other systems need path modifications)
 
-2. Common Issues:
-   - If "Tesseract-OCR not found" appears, check installation path
-   - If unable to connect to Chrome, verify browser is properly launched
-   - If recognition rate is unsatisfactory, image preprocessing parameters may need adjustment
+#### Common Issues:
+- If "Tesseract-OCR not found" appears, check installation path
+- If unable to connect to Chrome, verify browser is properly launched
+- If recognition rate is unsatisfactory, image preprocessing parameters may need adjustment
 
-3. Folder Description:
-   - saved_captcha: Stores original captcha images
-   - processed_captcha: Stores processed images (named with recognized text)
-   - temp: Temporary folder (automatically created and deleted during execution)
+#### Folder Description:
+- saved_captcha: Stores original captcha images
+- processed_captcha: Stores processed images (named with recognized text)
+- temp: Temporary folder (automatically created and deleted during execution)
 
 
 ## Disclaimer

@@ -83,7 +83,12 @@ def process_image(input_path, output_path):
 
 def read_image(name):
     # 设置 Tesseract 路径
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Windows路径示例
+    
+    # Windows路径示例
+    # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+    # macOS路径示例
+    pytesseract.pytesseract.tesseract_cmd = r'/usr/local/bin/tesseract'
     
     img = Image.open(name)
     custom_config = r'--oem 3 --psm 8 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -175,7 +180,7 @@ def main():
         return
     
     # 检查 Tesseract 是否已安装
-    tesseract_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    tesseract_path = r'/usr/local/bin/tesseract'
     if not os.path.exists(tesseract_path):
         print("错误：未找到 Tesseract-OCR！")
         print("请先安装 Tesseract-OCR，下载地址：https://github.com/UB-Mannheim/tesseract/wiki")
