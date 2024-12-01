@@ -30,7 +30,7 @@ def process_and_read_captcha(driver, save_image_path):
         img_data = base64.b64decode(base64_img_data)
 
         # 使用 os.path.join 构建完整的文件路径
-        image_file_path = os.path.join(save_image_path, f'{i + 1}.png')
+        image_file_path = os.path.join(save_image_path, f'{10 * x + i + 1}.png')
         
         # 保存图片
         with open(image_file_path, 'wb') as file:
@@ -77,20 +77,23 @@ try:
         print("没有可用的窗口句柄。")
 
     # 循环语句进行200次
-    for i in range(200):
-        # 使用正确的文件路径格式
-        process_and_read_captcha(driver, save_image_path)
+    for x in range(20):
+        for i in range(10):
+            # 使用正确的文件路径格式
+            process_and_read_captcha(driver, save_image_path)
 
-        # 等待时间逐渐增加
-        n = 1
-        time.sleep(n)
-        n += 0.1
+            # 等待时间
+            n = 0.5
+            time.sleep(n)
 
-        # 点击刷新按钮
-        reload_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.ID, 'btnReload'))
-        )
-        reload_button.click()
+            # 点击刷新按钮
+            reload_button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.ID, 'btnReload'))
+            )
+            reload_button.click()
+        
+        # 由于连续点击12次会弹窗警告 只能暂停30s
+        time.sleep(30)
 
 except Exception as e:
     print(f"发生错误: {str(e)}")
