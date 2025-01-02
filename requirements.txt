@@ -1,0 +1,4 @@
+selenium==4.25.0
+pytesseract==0.3.13
+
+# seleniumbase==4.31.0
